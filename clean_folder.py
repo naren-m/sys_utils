@@ -1,5 +1,10 @@
+#############################
+# Author: Naren Mudivarthy
+#
+#############################
 
-
+# This script creates a directory for each kind of file extension
+# Moves the files to the corresponding extension folders
 
 import os, re
 import shutil
@@ -41,81 +46,81 @@ excel_extensions.append(".csv")
 movie_extensions = []
 movie_extensions.append(".mkv")
 
-dirToScreens = os.getcwd()
+def move_files_to_corresponding_dirs(dirToScreens):
+	print "Moving files to corresponding folders in ", dirToScreens 
 
-print "Moving files to corresponding folders in ", dirToScreens 
-
-# delete .DS_Store files
-find_and_delete_ds_store = "find . -type f -name '.DS_Store'  -delete"
-subprocess.call(find_and_delete_ds_store, shell=True)
-
-
-files = [f for f in os.listdir(dirToScreens) if os.path.isfile(os.path.join(dirToScreens, f))]
-
-for filename in files:
-	f, file_extension = os.path.splitext(filename)
-
-	target_filename = filename
-	if file_extension == "":
-		file_extension = ".no_extension"
-
-	if file_extension == ".pyc":
-		file_extension = ".py"
-
-	if file_extension in image_extensions:
-		file_extension = ".images"
-
-	if file_extension in doc_extensions:
-		file_extension = ".docs"
-
-	if file_extension in ppt_extensions:
-		file_extension = ".ppts"
-
-	if file_extension in excel_extensions:
-		file_extension = ".excel_sheets"
-
-	if file_extension in compressed_extensions:
-		file_extension = ".compressed"
-
-	if file_extension in app_extensions:
-		file_extension = ".installer_files"
-
-	if file_extension in movie_extensions:
-		file_extension = ".movies"
-
-	if file_extension.find("@") > 0:
-		file_extension = file_extension[:file_extension.index("@")]
-		dot_index = filename.index(".")
-		target_filename =  filename[  : filename.index("@", dot_index) ]
+	# delete .DS_Store files
+	find_and_delete_ds_store = "find . -type f -name '.DS_Store'  -delete"
+	subprocess.call(find_and_delete_ds_store, shell=True)
 
 
-	moveTo = os.path.join(dirToScreens, file_extension[1:])
-	if not os.path.exists(moveTo):
-		os.makedirs(moveTo)
+	files = [f for f in os.listdir(dirToScreens) if os.path.isfile(os.path.join(dirToScreens, f))]
 
-	src = os.path.join(dirToScreens, filename)
-	dst = os.path.join(moveTo, target_filename)
-	try:
-		shutil.move(src, dst)
-	except Exception as e:
-		print "Unable to arrange ", f
-		print "Reason:", str(e)
+	for filename in files:
+		f, file_extension = os.path.splitext(filename)
 
-####################################
-# Drity way to remove empty folders
-# Change it when you have time
-####################################
+		target_filename = filename
+		if file_extension == "":
+			file_extension = ".no_extension"
 
-# files = [f for f in os.listdir(dirToScreens) if not f.startswith(".")]
+		if file_extension == ".pyc":
+			file_extension = ".py"
 
-# for f in files:
-# 	if re.search(".", f):
-# 		print f
-# 		continue
+		if file_extension in image_extensions:
+			file_extension = ".images"
 
-# 	for walk_dir,dirs, fs in os.walk(os.path.join(dirToScreens, f)):
-# 		if (len(fs) == 0 and len(dirs) == 0) :
-# 			# shutil.rmtree(walk_dir)
-# 			print "Deleted -", walk_dir
-			
+		if file_extension in doc_extensions:
+			file_extension = ".docs"
 
+		if file_extension in ppt_extensions:
+			file_extension = ".ppts"
+
+		if file_extension in excel_extensions:
+			file_extension = ".excel_sheets"
+
+		if file_extension in compressed_extensions:
+			file_extension = ".compressed"
+
+		if file_extension in app_extensions:
+			file_extension = ".installer_files"
+
+		if file_extension in movie_extensions:
+			file_extension = ".movies"
+
+		if file_extension.find("@") > 0:
+			file_extension = file_extension[:file_extension.index("@")]
+			dot_index = filename.index(".")
+			target_filename =  filename[  : filename.index("@", dot_index) ]
+
+
+		moveTo = os.path.join(dirToScreens, file_extension[1:])
+		if not os.path.exists(moveTo):
+			os.makedirs(moveTo)
+
+		src = os.path.join(dirToScreens, filename)
+		dst = os.path.join(moveTo, target_filename)
+		try:
+			shutil.move(src, dst)
+		except Exception as e:
+			print "Unable to arrange ", f
+			print "Reason:", str(e)
+
+	####################################
+	# Drity way to remove empty folders
+	# Change it when you have time
+	####################################
+
+	# files = [f for f in os.listdir(dirToScreens) if not f.startswith(".")]
+
+	# for f in files:
+	# 	if re.search(".", f):
+	# 		print f
+	# 		continue
+
+	# 	for walk_dir,dirs, fs in os.walk(os.path.join(dirToScreens, f)):
+	# 		if (len(fs) == 0 and len(dirs) == 0) :
+	# 			# shutil.rmtree(walk_dir)
+	# 			print "Deleted -", walk_dir
+				
+if __name__ == '__main__':
+	move_files_to_corresponding_dirs(dirToScreens = os.getcwd())
