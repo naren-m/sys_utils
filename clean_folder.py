@@ -46,12 +46,20 @@ excel_extensions.append(".csv")
 movie_extensions = []
 movie_extensions.append(".mkv")
 
+c_program_extensions = []
+c_program_extensions.append(".c")
+c_program_extensions.append(".h")
+c_program_extensions.append(".cpp")
+
+
 def move_files_to_corresponding_dirs(dirToScreens):
 	print "Moving files to corresponding folders in ", dirToScreens 
 
 	# delete .DS_Store files
+	print "started cleaning .DS_Store files"
 	find_and_delete_ds_store = "find . -type f -name '.DS_Store'  -delete"
 	subprocess.call(find_and_delete_ds_store, shell=True)
+	print "completed cleaning .DS_Store files"
 
 
 	files = [f for f in os.listdir(dirToScreens) if os.path.isfile(os.path.join(dirToScreens, f))]
@@ -62,9 +70,6 @@ def move_files_to_corresponding_dirs(dirToScreens):
 		target_filename = filename
 		if file_extension == "":
 			file_extension = ".no_extension"
-
-		if file_extension == ".pyc":
-			file_extension = ".py"
 
 		if file_extension in image_extensions:
 			file_extension = ".images"
@@ -86,6 +91,9 @@ def move_files_to_corresponding_dirs(dirToScreens):
 
 		if file_extension in movie_extensions:
 			file_extension = ".movies"
+
+		if file_extension in c_program_extensions:
+			file_extension = ".c_programs"
 
 		if file_extension.find("@") > 0:
 			file_extension = file_extension[:file_extension.index("@")]
