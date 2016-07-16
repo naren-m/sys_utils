@@ -37,7 +37,6 @@ def get_jpeg_exif_time(file_path):
 
     return None
 
-
 def get_file_name(file_path):
     new_file_name = get_jpeg_exif_time(file_path)
     if not new_file_name:
@@ -95,19 +94,20 @@ def rename_images_to_creation_time_stamp(image_folder_path):
 
             new_file_path = os.path.join(dest_dir, new_file_name + file_extension)
 
-            print file_path + "->" +new_file_name
+            print file_path + " -> " +new_file_name
             try:
                 os.rename(file_path, new_file_path)
             except Exception as e:
-                print "Couldn't perform " +file_path + "->" +new_file_name
+                print "Couldn't perform " +file_path + " -> " +new_file_name
                 print e
                 return
 
+# atom git test
 
 """
     Usage : python image_rename.py
-            or 
-            python image_rename.py /path/to/image/dir    
+            or
+            python image_rename.py /path/to/image/dir
 """
 if __name__ == '__main__':
     try:
