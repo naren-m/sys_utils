@@ -123,6 +123,9 @@ def delete_empty_folders(dirToScreens):
     files = [f for f in os.listdir(dirToScreens) if not f.startswith(".")]
 
     for walk_dir, dirs, fs in os.walk(dirToScreens):
+        if walk_dir.find(".git"):
+            continue
+
         if (len(fs) == 0 and len(dirs) == 0):
             shutil.rmtree(walk_dir)
             print("Deleted -", walk_dir)
