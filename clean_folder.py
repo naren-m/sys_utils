@@ -6,7 +6,8 @@
 # This script creates a directory for each kind of file extension
 # Moves the files to the corresponding extension folders
 
-import os, re
+import os
+import re
 import shutil
 import subprocess
 
@@ -53,16 +54,16 @@ c_program_extensions.append(".cpp")
 
 
 def move_files_to_corresponding_dirs(dirToScreens):
-    print "Moving files to corresponding folders in ", dirToScreens
+    print("Moving files to corresponding folders in ", dirToScreens)
 
     # delete .DS_Store files
-    print "started cleaning .DS_Store files"
+    print("started cleaning .DS_Store files")
     find_and_delete_ds_store = "find . -type f -name '.DS_Store'  -delete"
     subprocess.call(find_and_delete_ds_store, shell=True)
-    print "completed cleaning .DS_Store files"
+    print("completed cleaning .DS_Store files")
 
-
-    files = [f for f in os.listdir(dirToScreens) if os.path.isfile(os.path.join(dirToScreens, f))]
+    files = [f for f in os.listdir(dirToScreens) if os.path.isfile(
+        os.path.join(dirToScreens, f))]
 
     for filename in files:
         f, file_extension = os.path.splitext(filename)
@@ -98,8 +99,7 @@ def move_files_to_corresponding_dirs(dirToScreens):
         if file_extension.find("@") > 0:
             file_extension = file_extension[:file_extension.index("@")]
             dot_index = filename.index(".")
-            target_filename =  filename[  : filename.index("@", dot_index) ]
-
+            target_filename = filename[: filename.index("@", dot_index)]
 
         moveTo = os.path.join(dirToScreens, file_extension[1:])
         if not os.path.exists(moveTo):
@@ -110,25 +110,24 @@ def move_files_to_corresponding_dirs(dirToScreens):
         try:
             shutil.move(src, dst)
         except Exception as e:
-            print "Unable to arrange ", f
-            print "Reason:", str(e)
+            print("Unable to arrange ", f)
+            print("Reason:", str(e))
 
-    ####################################
-    # Drity way to remove empty folders
-    # Change it when you have time
-    ####################################
+####################################
+# Drity way to remove empty folders
+# Change it when you have time
+####################################
 
-    # files = [f for f in os.listdir(dirToScreens) if not f.startswith(".")]
 
-    # for f in files:
-    #     if re.search(".", f):
-    #         print f
-    #         continue
+def delete_empty_folders(dirToScreens):
+    files = [f for f in os.listdir(dirToScreens) if not f.startswith(".")]
 
-    #     for walk_dir,dirs, fs in os.walk(os.path.join(dirToScreens, f)):
-    #         if (len(fs) == 0 and len(dirs) == 0) :
-    #             # shutil.rmtree(walk_dir)
-    #             print "Deleted -", walk_dir
+    for walk_dir, dirs, fs in os.walk(dirToScreens):
+        if (len(fs) == 0 and len(dirs) == 0):
+            shutil.rmtree(walk_dir)
+            print("Deleted -", walk_dir)
+
 
 if __name__ == '__main__':
-    move_files_to_corresponding_dirs(dirToScreens = os.getcwd())
+    move_files_to_corresponding_dirs(dirToScreens=os.getcwd())
+    delete_empty_folders(dirToScreens=os.getcwd())
