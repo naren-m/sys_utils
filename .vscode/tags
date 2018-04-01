@@ -1,0 +1,25 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/9b2eec5/
+app_extensions	../clean_folder.py	/^app_extensions = []$/;"	kind:variable	line:30
+c_program_extensions	../clean_folder.py	/^c_program_extensions = []$/;"	kind:variable	line:50
+clean_folder.py	../clean_folder.py	1;"	kind:file	line:1
+compressed_extensions	../clean_folder.py	/^compressed_extensions = []$/;"	kind:variable	line:23
+delete_empty_folders	../clean_folder.py	/^def delete_empty_folders(dirToScreens):$/;"	kind:function	line:122
+doc_extensions	../clean_folder.py	/^doc_extensions = []$/;"	kind:variable	line:35
+excel_extensions	../clean_folder.py	/^excel_extensions = []$/;"	kind:variable	line:42
+generate_filename_with_timestamp	../image_rename.py	/^def generate_filename_with_timestamp(file_path):$/;"	kind:function	line:54
+get_jpeg_exif_time	../image_rename.py	/^def get_jpeg_exif_time(file_path):$/;"	kind:function	line:36
+image_extensions	../clean_folder.py	/^image_extensions = []$/;"	kind:variable	line:14
+image_extensions	../image_rename.py	/^image_extensions = list()$/;"	kind:variable	line:25
+image_rename.py	../image_rename.py	1;"	kind:file	line:1
+logger	../image_rename.py	/^logger = logging.getLogger()$/;"	kind:variable	line:22
+main	../image_rename.py	/^def main():$/;"	kind:function	line:147
+move_files_to_corresponding_dirs	../clean_folder.py	/^def move_files_to_corresponding_dirs(dirToScreens):$/;"	kind:function	line:56
+movie_extensions	../clean_folder.py	/^movie_extensions = []$/;"	kind:variable	line:47
+ppt_extensions	../clean_folder.py	/^ppt_extensions = []$/;"	kind:variable	line:39
+rename_images	../image_rename.py	/^def rename_images(image_folder_path, destination_dir = None,$/;"	kind:function	line:69
